@@ -48,7 +48,7 @@ const ColorList = ({ colors, updateColors }) => {
                   deleteColor(color);
                 }}
               >
-                x
+                X
               </span>{' '}
               {color.color}
             </span>
@@ -91,6 +91,10 @@ const ColorList = ({ colors, updateColors }) => {
       )}
       <div className='spacer' />
       {/* stretch - build another form here to add a color */}
+
+      <div className='newColor-form'>
+        <form></form>
+      </div>
     </div>
   );
 };
