@@ -8,6 +8,7 @@ const initialColor = {
 
 const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
   const editColor = (color) => {
