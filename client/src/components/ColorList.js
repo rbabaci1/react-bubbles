@@ -90,11 +90,32 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className='spacer' />
-      {/* stretch - build another form here to add a color */}
 
+      {/* stretch - build another form here to add a color */}
       <div className='newColor-form'>
-        <form></form>
+        {!editing && !adding && (
+          <h3 onClick={() => setAdding(true)}>Add a color</h3>
+        )}
+
+        {adding && (
+          <div className='newColor-form'>
+            <form>
+              <label>
+                color name:
+                <input type='text' placeholder='...color name' />
+              </label>
+
+              <label>
+                hex code:
+                <input type='text' placeholder='...hex code' />
+              </label>
+
+              <section className='btn-section'>
+                <button>Add</button>
+              </section>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -102,19 +102,18 @@ form {
     font-size: 20px;
     padding: 5px 8px;
   }
+}
+.btn-section {
+  button {
+    padding: 5px 20px;
+    font-size: 18px;
+    background-color: rgb(218, 215, 215);
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
 
-  .btn-section {
-    button {
-      padding: 5px 20px;
-      font-size: 18px;
-      background-color: rgb(218, 215, 215);
-      border-radius: 3px;
-      cursor: pointer;
-      margin-top: 20px;
-
-      &:hover {
-        background-color: rgb(163, 161, 161);
-      }
+    &:hover {
+      background-color: rgb(163, 161, 161);
     }
   }
 }
@@ -130,5 +129,27 @@ form {
     color: white;
     padding: 3px 8px;
     margin-top: 16px;
+  }
+}
+
+.newColor-form {
+  h3 {
+    cursor: pointer;
+  }
+
+  form {
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px dashed rgb(199, 198, 198);
+    padding: 10px;
+
+    label {
+      padding: 10px 0;
+    }
+    input {
+      font-size: 14px;
+    }
+    button {
+    }
   }
 }
