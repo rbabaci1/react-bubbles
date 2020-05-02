@@ -10,10 +10,19 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [newColor, setNewColor] = useState(initialColor);
 
   const editColor = (color) => {
     setEditing(true);
     setColorToEdit(color);
+  };
+
+  const addNewColor = (e) => {
+    e.preventDefault();
+
+    // updateColors('ADD', newColor);
+
+    setAdding(false);
   };
 
   const saveEdit = (e) => {
@@ -99,15 +108,29 @@ const ColorList = ({ colors, updateColors }) => {
 
         {adding && (
           <div className='newColor-form'>
-            <form>
+            <form onSubmit={addNewColor}>
               <label>
                 color name:
-                <input type='text' placeholder='...color name' />
+                <input
+                  onChange={(e) => {
+                    setNewColor({ ...newColor, color: e.target.value });
+                  }}
+                  value={newColor.color}
+                  type='text'
+                  placeholder='...color name'
+                />
               </label>
 
               <label>
                 hex code:
-                <input type='text' placeholder='...hex code' />
+                <input
+                  onChange={(e) => {
+                    setNewColor({ ...newColor, code: { hex: e.target.value } });
+                  }}
+                  value={newColor.code.hex}
+                  type='text'
+                  placeholder='...hex code'
+                />
               </label>
 
               <section className='btn-section'>

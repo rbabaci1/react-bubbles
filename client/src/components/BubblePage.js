@@ -22,6 +22,8 @@ const BubblePage = () => {
       );
     } else if (action === 'DELETE') {
       setColorList(colorList.filter((color) => color.id !== editedColor));
+    } else if (action === 'ADD') {
+      setColorList({ editedColor, ...colorList });
     }
   };
 
