@@ -3,6 +3,8 @@ import { Route, useHistory } from 'react-router-dom';
 import axiosWithAuth from './utils/axiosWithAuth';
 import Login from './components/Login';
 import './styles.scss';
+import PrivateRoute from './PrivateRoutes/PrivateRoute';
+import BubblePage from './components/BubblePage';
 
 const initialState = {
   username: '',
@@ -42,7 +44,7 @@ function App() {
           const token = res.data.payload;
 
           localStorage.setItem('token', token);
-          history.push('/bubblePage');
+          history.push('/bubblesPage');
         })
         .catch((err) => {
           setUserInfo({
@@ -73,6 +75,7 @@ function App() {
           Build a PrivateRoute component that will 
           display BubblePage when you're authenticated 
         */}
+      <PrivateRoute path='/bubblesPage' component={BubblePage} />
     </div>
   );
 }
