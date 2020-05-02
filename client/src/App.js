@@ -21,6 +21,7 @@ function App() {
     setUserInfo({
       ...userInfo,
       [e.target.name]: e.target.value,
+      error: '',
     });
   };
 
@@ -30,6 +31,7 @@ function App() {
     setUserInfo({
       ...userInfo,
       loading: true,
+      error: '',
     });
 
     setTimeout(() => {
@@ -44,6 +46,7 @@ function App() {
           const token = res.data.payload;
 
           localStorage.setItem('token', token);
+          setUserInfo({ ...userInfo, password: '' });
           history.push('/bubblesPage');
         })
         .catch((err) => {
@@ -71,10 +74,7 @@ function App() {
           />
         )}
       />
-      {/* 
-          Build a PrivateRoute component that will 
-          display BubblePage when you're authenticated 
-        */}
+
       <PrivateRoute path='/bubblesPage' component={BubblePage} />
     </div>
   );

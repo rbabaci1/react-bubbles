@@ -10,7 +10,7 @@ const Login = ({ handleLogin, userInfo, handleChange }) => {
 
         <h1 className='login-header'>Log in</h1>
 
-        {error && <span>{error}</span>}
+        {error && <span style={{ color: 'red' }}>{error}</span>}
 
         <form onSubmit={handleLogin}>
           <label>

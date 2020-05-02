@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { userHistory, useHistory } from 'react-router-dom';
 
 const initialColor = {
   color: '',
@@ -11,6 +12,7 @@ const ColorList = ({ colors, updateColors }) => {
   const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [newColor, setNewColor] = useState(initialColor);
+  const history = useHistory();
 
   const editColor = (color) => {
     setEditing(true);
@@ -42,6 +44,15 @@ const ColorList = ({ colors, updateColors }) => {
       .catch((err) => console.error(err));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setAdding(false);
+    setEditing(false);
+    setColorToEdit(initialColor);
+    setNewColor(initialColor);
+    history.push('/');
+  };
+
   const deleteColor = (color) => {
     axiosWithAuth()
       .delete(`/colors/${color.id}`)
@@ -51,7 +62,12 @@ const ColorList = ({ colors, updateColors }) => {
 
   return (
     <div className='colors-wrap'>
+      <section className='logout'>
+        <p onClick={handleLogout}>Logout</p>
+      </section>
+
       <p>colors</p>
+
       <ul>
         {colors.map((color) => (
           <li key={color.color} onClick={() => editColor(color)}>
@@ -74,6 +90,7 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
