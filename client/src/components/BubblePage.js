@@ -13,17 +13,15 @@ const BubblePage = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  const updateColors = (action, editedColor) => {
+  const updateColors = (action, data) => {
     if (action === 'EDIT') {
       setColorList(
-        colorList.map((color) =>
-          color.id === editedColor.id ? editedColor : color
-        )
+        colorList.map((color) => (color.id === data.id ? data : color))
       );
     } else if (action === 'DELETE') {
-      setColorList(colorList.filter((color) => color.id !== editedColor));
+      setColorList(colorList.filter((color) => color.id !== data));
     } else if (action === 'ADD') {
-      setColorList({ editedColor, ...colorList });
+      setColorList(data);
     }
   };
 

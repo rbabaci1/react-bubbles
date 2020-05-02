@@ -20,8 +20,10 @@ const ColorList = ({ colors, updateColors }) => {
   const addNewColor = (e) => {
     e.preventDefault();
 
-    // updateColors('ADD', newColor);
-
+    axiosWithAuth()
+      .post('/colors', newColor)
+      .then((res) => updateColors('ADD', res.data))
+      .catch((err) => console.error(err));
     setAdding(false);
   };
 
