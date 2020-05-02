@@ -45,6 +45,10 @@ const Login = () => {
             required
           />
         </label>
+
+        <section className='btn-section'>
+          <button>Login</button>
+        </section>
       </form>
     </div>
   );
