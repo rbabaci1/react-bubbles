@@ -10,6 +10,13 @@ const Login = () => {
   // when you have handled the token, navigate to the BubblePage route
   const [userInfo, setUserInfo] = useState(initialState);
 
+  const handleChange = (e) => {
+    setUserInfo({
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className='login-form'>
       <h1>Welcome to the Bubble App!</h1>
@@ -19,12 +26,24 @@ const Login = () => {
       <form>
         <label>
           Type your username:
-          <input type='text' placeholder='...username' required />
+          <input
+            onChange={handleChange}
+            type='text'
+            name='username'
+            placeholder='...username'
+            required
+          />
         </label>
 
         <label>
           Type your password:
-          <input type='text' placeholder='...password' required />
+          <input
+            onChange={handleChange}
+            type='text'
+            name='password'
+            placeholder='...password'
+            required
+          />
         </label>
       </form>
     </div>
