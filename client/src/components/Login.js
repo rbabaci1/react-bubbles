@@ -17,6 +17,11 @@ const Login = ({ handleLogin }) => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(userInfo);
+  };
+
   return (
     <>
       <div className='login-form'>
@@ -24,7 +29,7 @@ const Login = ({ handleLogin }) => {
 
         <h1 className='login-header'>Log in</h1>
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit}>
           <label>
             Type your username:
             <input
