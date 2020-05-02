@@ -125,10 +125,15 @@ form {
 
   button {
     border: none;
-    background-color: black;
-    color: white;
-    padding: 3px 8px;
+    background-color: rgb(218, 215, 215);
+    padding: 5px 15px;
+    font-size: 18px;
+    cursor: pointer;
     margin-top: 16px;
+
+    &:hover {
+      background-color: rgb(163, 161, 161);
+    }
   }
 }
 

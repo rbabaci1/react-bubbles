@@ -14,6 +14,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   const editColor = (color) => {
     setEditing(true);
+    setAdding(false);
     setColorToEdit(color);
   };
 
@@ -108,7 +109,7 @@ const ColorList = ({ colors, updateColors }) => {
       <div className='newColor-form'>
         {!editing && <h3 onClick={() => setAdding(true)}>Add a color</h3>}
 
-        {adding && (
+        {adding && !editing && (
           <div className='newColor-form'>
             <form onSubmit={addNewColor}>
               <label>
