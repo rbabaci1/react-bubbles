@@ -135,6 +135,15 @@ form {
 .newColor-form {
   h3 {
     cursor: pointer;
+    margin: 50px 30px 0 30px;
+    background-color: rgb(223, 219, 219);
+    padding: 5px 0;
+    transition-duration: 0.3s;
+
+    &:hover {
+      background-color: rgb(150, 149, 149);
+      color: #fff;
+    }
   }
 
   form {
@@ -142,6 +151,7 @@ form {
     box-sizing: border-box;
     border-top: 1px dashed rgb(199, 198, 198);
     padding: 10px;
+    margin-top: 20px;
 
     label {
       padding: 10px 0;

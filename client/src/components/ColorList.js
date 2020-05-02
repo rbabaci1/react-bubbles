@@ -138,7 +138,9 @@ const ColorList = ({ colors, updateColors }) => {
               <section className='btn-section'>
                 <button type='submit'>Add</button>
 
-                <button type='button'>Cancel</button>
+                <button type='button' onClick={() => setAdding(false)}>
+                  Cancel
+                </button>
               </section>
             </form>
           </div>
