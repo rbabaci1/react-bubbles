@@ -1,29 +1,10 @@
 import React, { useState } from 'react';
 
-const initialState = {
-  username: '',
-  password: '',
-  loading: false,
-  error: '',
-};
-
-const Login = ({ handleLogin }) => {
+const Login = ({ handleLogin, userInfo, handleChange }) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  const [userInfo, setUserInfo] = useState(initialState);
 
-  const handleChange = (e) => {
-    setUserInfo({
-      ...userInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(userInfo, setUserInfo);
-    setUserInfo(initialState);
-  };
+  const { username, password, loading, error } = userInfo;
 
   return (
     <>
@@ -32,12 +13,14 @@ const Login = ({ handleLogin }) => {
 
         <h1 className='login-header'>Log in</h1>
 
-        <form onSubmit={handleSubmit}>
+        {error && <span>{error}</span>}
+
+        <form onSubmit={handleLogin}>
           <label>
             Type your username:
             <input
               onChange={handleChange}
-              value={userInfo.username}
+              value={username}
               type='text'
               name='username'
               placeholder='...username'
@@ -49,7 +32,7 @@ const Login = ({ handleLogin }) => {
             Type your password:
             <input
               onChange={handleChange}
-              value={userInfo.password}
+              value={password}
               type='password'
               name='password'
               placeholder='...password'
@@ -58,7 +41,9 @@ const Login = ({ handleLogin }) => {
           </label>
 
           <section className='btn-section'>
-            <button>Login</button>
+            <button disabled={loading}>
+              {loading ? 'Loading...' : 'Login'}
+            </button>
           </section>
         </form>
       </div>
