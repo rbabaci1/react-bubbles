@@ -24,7 +24,9 @@ const ColorList = ({ colors, updateColors }) => {
       .post('/colors', newColor)
       .then((res) => updateColors('ADD', res.data))
       .catch((err) => console.error(err));
+
     setAdding(false);
+    setNewColor(initialColor);
   };
 
   const saveEdit = (e) => {
@@ -104,9 +106,7 @@ const ColorList = ({ colors, updateColors }) => {
 
       {/* stretch - build another form here to add a color */}
       <div className='newColor-form'>
-        {!editing && !adding && (
-          <h3 onClick={() => setAdding(true)}>Add a color</h3>
-        )}
+        {!editing && <h3 onClick={() => setAdding(true)}>Add a color</h3>}
 
         {adding && (
           <div className='newColor-form'>
@@ -136,7 +136,9 @@ const ColorList = ({ colors, updateColors }) => {
               </label>
 
               <section className='btn-section'>
-                <button>Add</button>
+                <button type='submit'>Add</button>
+
+                <button type='button'>Cancel</button>
               </section>
             </form>
           </div>
