@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 const initialState = {
   username: '',
   password: '',
+  loading: false,
+  error: '',
 };
 
 const Login = ({ handleLogin }) => {
@@ -19,7 +21,8 @@ const Login = ({ handleLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(userInfo);
+    handleLogin(userInfo, setUserInfo);
+    setUserInfo(initialState);
   };
 
   return (
@@ -34,6 +37,7 @@ const Login = ({ handleLogin }) => {
             Type your username:
             <input
               onChange={handleChange}
+              value={userInfo.username}
               type='text'
               name='username'
               placeholder='...username'
@@ -45,7 +49,8 @@ const Login = ({ handleLogin }) => {
             Type your password:
             <input
               onChange={handleChange}
-              type='text'
+              value={userInfo.password}
+              type='password'
               name='password'
               placeholder='...password'
               required
