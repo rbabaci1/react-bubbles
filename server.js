@@ -101,7 +101,7 @@ function authenticator(req, res, next) {
   }
 }
 
-app.post("/api/login", (req, res) => {
+app.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (username === "username" && password === "password") {
     req.loggedIn = true;
@@ -117,11 +117,11 @@ app.post("/api/login", (req, res) => {
   }
 });
 
-app.get("/api/colors", authenticator, (req, res) => {
+app.get("/colors", authenticator, (req, res) => {
   res.send(colors);
 });
 
-app.post("/api/colors", authenticator, (req, res) => {
+app.post("/colors", authenticator, (req, res) => {
   if (req.body.color !== undefined && req.body.code !== undefined) {
     const newcolor = req.body;
     newcolor.id = nextId;
@@ -131,7 +131,7 @@ app.post("/api/colors", authenticator, (req, res) => {
   res.status(201).json(colors);
 });
 
-app.put("/api/colors/:id", authenticator, (req, res) => {
+app.put("/colors/:id", authenticator, (req, res) => {
   if (!req.params.id)
     res.status(400).send("Your request is missing the color id");
   if (req.body.id === undefined || !req.body.color || !req.body.code) {
@@ -148,7 +148,7 @@ app.put("/api/colors/:id", authenticator, (req, res) => {
   res.status(200).send(req.body);
 });
 
-app.delete("/api/colors/:id", authenticator, (req, res) => {
+app.delete("/colors/:id", authenticator, (req, res) => {
   if (!req.params.id)
     res.status(400).send("Your request is missing the color id");
   colors = colors.filter(color => `${color.id}` !== req.params.id);
