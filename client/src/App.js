@@ -38,7 +38,6 @@ function App() {
       axiosWithAuth()
         .post("/api/login", userInfo)
         .then(res => {
-          console.log(res);
           setUserInfo({
             ...userInfo,
             loading: false,
