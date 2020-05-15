@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosWithAuth = () => {
   return axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: "https://serene-reef-93732.herokuapp.com",
     headers: {
-      Authorization: localStorage.getItem('token'),
+      Authorization: localStorage.getItem("token"),
     },
   });
 };
