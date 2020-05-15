@@ -5,12 +5,14 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     axiosWithAuth()
-      .get("/api/colors")
+      .get("/colors")
       .then(res => setColorList(res.data))
       .catch(err => console.error(err));
+    setLoggedIn(true);
   }, []);
 
   const updateColors = (action, data) => {
@@ -27,7 +29,12 @@ const BubblePage = () => {
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={updateColors} />
+      <ColorList
+        colors={colorList}
+        updateColors={updateColors}
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+      />
       <Bubbles colors={colorList} />
     </>
   );

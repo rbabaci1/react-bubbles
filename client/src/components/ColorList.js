@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { userHistory, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const initialColor = {
   color: "",
   code: { hex: "" },
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, loggedIn, setLoggedIn }) => {
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -24,7 +24,7 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
 
     axiosWithAuth()
-      .post("/api/colors", newColor)
+      .post("/colors", newColor)
       .then(res => updateColors("ADD", res.data))
       .catch(err => console.error(err));
 
@@ -50,7 +50,11 @@ const ColorList = ({ colors, updateColors }) => {
     setEditing(false);
     setColorToEdit(initialColor);
     setNewColor(initialColor);
-    history.push("/");
+    setLoggedIn(false);
+
+    setTimeout(() => {
+      history.push("/");
+    }, 1500);
   };
 
   const deleteColor = color => {
@@ -63,7 +67,9 @@ const ColorList = ({ colors, updateColors }) => {
   return (
     <div className='colors-wrap'>
       <section className='logout'>
-        <p onClick={handleLogout}>Logout</p>
+        <button onClick={handleLogout} disabled={loggedIn ? false : true}>
+          Logout
+        </button>
       </section>
 
       <p>colors</p>
