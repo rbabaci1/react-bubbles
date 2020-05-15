@@ -5,6 +5,7 @@ const CORS = require("cors");
 const app = express();
 const token =
   "ahuBHejkJJiMDhmODZhZi0zaeLTQ4ZfeaseOGZgesai1jZWYgrTA07i73Gebhu98";
+const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(CORS());
@@ -158,6 +159,6 @@ app.get("/", function (req, res) {
   res.send("App is working 👍");
 });
 
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log("Server listening on port 5000");
 });
