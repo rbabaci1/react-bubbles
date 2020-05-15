@@ -1,55 +1,55 @@
-import React, { useState } from 'react';
-import { Route, useHistory } from 'react-router-dom';
-import axiosWithAuth from './utils/axiosWithAuth';
-import Login from './components/Login';
-import './styles.scss';
-import PrivateRoute from './PrivateRoutes/PrivateRoute';
-import BubblePage from './components/BubblePage';
+import React, { useState } from "react";
+import { Route, useHistory } from "react-router-dom";
+import axiosWithAuth from "./utils/axiosWithAuth";
+import Login from "./components/Login";
+import "./styles.scss";
+import PrivateRoute from "./PrivateRoutes/PrivateRoute";
+import BubblePage from "./components/BubblePage";
 
 const initialState = {
-  username: '',
-  password: '',
+  username: "username",
+  password: "password",
   loading: false,
-  error: '',
+  error: "",
 };
 
 function App() {
   const history = useHistory();
   const [userInfo, setUserInfo] = useState(initialState);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setUserInfo({
       ...userInfo,
       [e.target.name]: e.target.value,
-      error: '',
+      error: "",
     });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = e => {
     e.preventDefault();
 
     setUserInfo({
       ...userInfo,
       loading: true,
-      error: '',
+      error: "",
     });
 
     setTimeout(() => {
       axiosWithAuth()
-        .post('/login', userInfo)
-        .then((res) => {
+        .post("/login", userInfo)
+        .then(res => {
           setUserInfo({
             ...userInfo,
             loading: false,
-            error: '',
+            error: "",
           });
           const token = res.data.payload;
 
-          localStorage.setItem('token', token);
-          setUserInfo({ ...userInfo, password: '' });
-          history.push('/bubblesPage');
+          localStorage.setItem("token", token);
+          setUserInfo({ ...userInfo, password: "" });
+          history.push("/bubblesPage");
         })
-        .catch((err) => {
+        .catch(err => {
           setUserInfo({
             ...userInfo,
             loading: false,
@@ -65,7 +65,7 @@ function App() {
       <Route
         exact
         path='/'
-        render={(props) => (
+        render={props => (
           <Login
             {...props}
             userInfo={userInfo}
