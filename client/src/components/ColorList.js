@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import axiosWithAuth from '../utils/axiosWithAuth';
-import { userHistory, useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import { userHistory, useHistory } from "react-router-dom";
 
 const initialColor = {
-  color: '',
-  code: { hex: '' },
+  color: "",
+  code: { hex: "" },
 };
 
 const ColorList = ({ colors, updateColors }) => {
@@ -14,50 +14,50 @@ const ColorList = ({ colors, updateColors }) => {
   const [newColor, setNewColor] = useState(initialColor);
   const history = useHistory();
 
-  const editColor = (color) => {
+  const editColor = color => {
     setEditing(true);
     setAdding(false);
     setColorToEdit(color);
   };
 
-  const addNewColor = (e) => {
+  const addNewColor = e => {
     e.preventDefault();
 
     axiosWithAuth()
-      .post('/colors', newColor)
-      .then((res) => updateColors('ADD', res.data))
-      .catch((err) => console.error(err));
+      .post("/api/colors", newColor)
+      .then(res => updateColors("ADD", res.data))
+      .catch(err => console.error(err));
 
     setAdding(false);
     setNewColor(initialColor);
   };
 
-  const saveEdit = (e) => {
+  const saveEdit = e => {
     e.preventDefault();
 
     axiosWithAuth()
       .put(`/colors/${colorToEdit.id}`, colorToEdit)
-      .then((res) => {
-        updateColors('EDIT', res.data);
+      .then(res => {
+        updateColors("EDIT", res.data);
         setEditing(false);
       })
-      .catch((err) => console.error(err));
+      .catch(err => console.error(err));
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setAdding(false);
     setEditing(false);
     setColorToEdit(initialColor);
     setNewColor(initialColor);
-    history.push('/');
+    history.push("/");
   };
 
-  const deleteColor = (color) => {
+  const deleteColor = color => {
     axiosWithAuth()
       .delete(`/colors/${color.id}`)
-      .then((res) => updateColors('DELETE', res.data))
-      .catch((err) => console.error(err));
+      .then(res => updateColors("DELETE", res.data))
+      .catch(err => console.error(err));
   };
 
   return (
@@ -69,18 +69,18 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
 
       <ul>
-        {colors.map((color) => (
+        {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
               <span
                 className='delete'
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation();
                   deleteColor(color);
                 }}
               >
                 X
-              </span>{' '}
+              </span>{" "}
               {color.color}
             </span>
             <div
@@ -97,7 +97,7 @@ const ColorList = ({ colors, updateColors }) => {
           <label>
             color name:
             <input
-              onChange={(e) =>
+              onChange={e =>
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
               }
               value={colorToEdit.color}
@@ -106,7 +106,7 @@ const ColorList = ({ colors, updateColors }) => {
           <label>
             hex code:
             <input
-              onChange={(e) =>
+              onChange={e =>
                 setColorToEdit({
                   ...colorToEdit,
                   code: { hex: e.target.value },
@@ -132,7 +132,7 @@ const ColorList = ({ colors, updateColors }) => {
               <label>
                 color name:
                 <input
-                  onChange={(e) => {
+                  onChange={e => {
                     setNewColor({ ...newColor, color: e.target.value });
                   }}
                   value={newColor.color}
@@ -144,7 +144,7 @@ const ColorList = ({ colors, updateColors }) => {
               <label>
                 hex code:
                 <input
-                  onChange={(e) => {
+                  onChange={e => {
                     setNewColor({ ...newColor, code: { hex: e.target.value } });
                   }}
                   value={newColor.code.hex}

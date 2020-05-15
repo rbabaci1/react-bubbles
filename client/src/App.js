@@ -36,8 +36,9 @@ function App() {
 
     setTimeout(() => {
       axiosWithAuth()
-        .post("/login", userInfo)
+        .post("/api/login", userInfo)
         .then(res => {
+          console.log(res);
           setUserInfo({
             ...userInfo,
             loading: false,
